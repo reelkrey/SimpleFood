@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.min.css">
+    <title>Simple Food</title>
+</head>
+<body> 
+
+<header class="header">
+    <div class="container">
+        <nav class="menu">
+            <a class="logo" href="#body">
+                <img class="logo__image" src="images/logo.svg" alt="логотип">
+            </a>
+            <div class="menu__inner">
+                <ul class="menu__nav">
+                    <li class="menu__item">
+                        <a class="menu__link menu__link--active" href="#">Главная</a>
+                    </li>
+                    <li class="menu__item">
+                        <a class="menu__link" href="#">Блюда</a>
+                    </li>
+                    <li class="menu__item">
+                        <a class="menu__link" href="#">Контакты</a>
+                    </li>
+                </ul>
+                <ul class="user-nav">
+                    <li class="user-nav__item">
+                        <button class="user-nav__button" type="button">
+                            <span class="sr-only">Поиск</span>
+                            <img class="user-nav__image" src="images/search.svg" alt="Поиск">
+                        </button>
+                    </li>
+                    <li class="user-nav__item">
+                        <button class="user-nav__button" type="button">
+                            <span class="sr-only">Корзина</span>
+                            <img class="user-nav__image" src="images/basket.svg" alt="Корзина">
+                            <span class="user-nav__num">4</span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="header__content" style="background-image: url('images/header-bg.svg');">
+            <h1 class="header__title">
+                Доставка
+                <span class="header__subtitle">За 15 минут</span>
+            </h1>
+            <p class="header__text">
+                Самый быстрый сервис доставки еды в вашем городе. Не уложимся в срок - доставка за наш счёт
+            </p>
+            <a class="header__button" href="#">Заказать</a>
+            <a class="header__link" href="#">Подробнее</a>
+        </div>
+    </div>
+</header>
+
+<main class="main">
+
+<section class="categories section">
+    <div class="container">
+        <h2 class="title categories__title">Популярные категории</h2>
+        <ul class="categories__filter">
+            <li class="categories__button">
+                <button class="categories__btn categories__btn--burger" data-filter="all" type="button">Бургеры</button>
+            </li>
+            <li class="categories__button">
+                <button class="categories__btn categories__btn--pizza" data-filter=".category-a" type="button">Пицца</button>
+            </li>
+            <li class="categories__button">
+                <button class="categories__btn categories__btn--sandwich" data-filter=".category-b" type="button">Сендвичи</button>
+            </li>
+            <li class="categories__button">
+                <button class="categories__btn categories__btn--asia" data-filter=".category-c" type="button">Азиатская кухня</button>
+            </li>
+            <li class="categories__button">
+                <button class="categories__btn categories__btn--set" data-filter=".category-d" type="button">Cеты</button>
+            </li>
+        </ul>
+        <ul class="categories__content">
+            <li class="card-item card-item--1 mix category-a">
+                <h3 class="card-item__info">Чизбургер с листьями салата</h3>
+                <span class="card-item__price">160 грн.</span>
+                <a class="card-item__link" href="#">В корзину</a>
+            </li>
+            <li class="card-item card-item--2 mix category-a">
+                <h3 class="card-item__info">Бифбургер</h3>
+                <span class="card-item__price">190 грн.</span>
+                <a class="card-item__link" href="#">В корзину</a>
+            </li>
+            <li class="card-item card-item--3 mix category-b">
+                <h3 class="card-item__info">Королевский чизбургер</h3>
+                <span class="card-item__price">260 грн.</span>
+                <a class="card-item__link" href="#">В корзину</a>
+            </li>
+            <li class="card-item card-item--4 mix category-b">
+                <h3 class="card-item__info">Черный гамбургер</h3>
+                <span class="card-item__price">199 грн.</span>
+                <a class="card-item__link" href="#">В корзину</a>
+            </li>
+            <li class="card-item card-item--5 mix category-b">
+                <h3 class="card-item__info">Чикен бургер</h3>
+                <span class="card-item__price">180 грн.</span>
+                <a class="card-item__link" href="#">В корзину</a>
+            </li>
+            <li class="card-item card-item--6 mix category-c">
+                <h3 class="card-item__info">Чизбургер с листьями салата</h3>
+                <span class="card-item__price">160 грн.</span>
+                <a class="card-item__link" href="#">В корзину</a>
+            </li>
+            <li class="card-item card-item--7 mix category-c">
+                <h3 class="card-item__info">Бифбургер</h3>
+                <span class="card-item__price">190 грн.</span>
+                <a class="card-item__link" href="#">В корзину</a>
+            </li>
+            <li class="card-item card-item--8 mix category-d">
+                <h3 class="card-item__info">Королевский чизбургер</h3>
+                <span class="card-item__price">260 грн.</span>
+                <a class="card-item__link" href="#">В корзину</a>
+            </li>
+            <li class="card-item card-item--9 mix category-d">
+                <h3 class="card-item__info">Черный гамбургер</h3>
+                <span class="card-item__price">199 грн.</span>
+                <a class="card-item__link" href="#">В корзину</a>
+            </li>
+            <li class="card-item card-item--10 mix category-d">
+                <h3 class="card-item__info">Чикен бургер</h3>
+                <span class="card-item__price">180 грн.</span>
+                <a class="card-item__link" href="#">В корзину</a>
+            </li>
+        </ul>
+        <button class="categories__link" type="button">Показать ещё</button>
+    </div>
+</section>
+
+</main>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="js/mixitup.min.js"></script>
+    <script src="js/main.min.js"></script>
+</body>
+</html>

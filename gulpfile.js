@@ -1,11 +1,12 @@
 const { src, dest, watch, parallel, series } = require('gulp');
-const scss                           = require('gulp-sass')(require('sass'));
-const concat                         = require('gulp-concat');
-const autoprefixer                   = require('gulp-autoprefixer');
-const uglify                         = require('gulp-uglify');
-const imagemin                       = require('gulp-imagemin');  
-const del                            = require('del');  
-const browserSync                    = require('browser-sync').create();
+const scss                                   = require('gulp-sass')(require('sass'));
+const concat                                 = require('gulp-concat');
+const autoprefixer                           = require('gulp-autoprefixer');
+const uglify                                 = require('gulp-uglify');
+const imagemin                               = require('gulp-imagemin');  
+const svgSprite                              = require('gulp-svg-sprite');
+const del                                    = require('del');  
+const browserSync                            = require('browser-sync').create();
 
 function  browsersync() {
     browserSync.init ({
@@ -62,10 +63,25 @@ function cleanDist() {
     return del('dist')
 }
 
+function svgSprites() {
+    return src('app/images/icons/*.svg')
+    .pipe(
+        svgSprite({
+          mode: {
+            stack: {
+              sprite: '../sprite.svg',
+            },
+          },
+        })
+      )
+    .pipe(dest('app/images'));
+  }
+
 function watching() {
     watch(['app/scss/**/*.scss'], styles);
     watch(['app/js/**/*.js', '!app/js/main.min.js'], scripts);
     watch(['app/**/*.html']).on('change', browserSync.reload);
+    watch(['app/images/icons/*.svg'], svgSprites);
 }
 
 
@@ -76,6 +92,7 @@ exports.browsersync  = browsersync;
 exports.watching     = watching;
 exports.images       = images;
 exports.cleanDist    = cleanDist;
+exports.svgSprites   = svgSprites;
 exports.build        = series(cleanDist, images, build);
 
-exports.default      = parallel(styles, scripts, browsersync, watching);
+exports.default      = parallel(svgSprites, styles, scripts, browsersync, watching);
