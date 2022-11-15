@@ -1,4 +1,4 @@
 $(function(){
 });
 
-var mixer = mixitup('.categories__content');
+var mixer = mixitup('.pop-categories__content');
