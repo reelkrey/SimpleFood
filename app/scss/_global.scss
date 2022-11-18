@@ -45,7 +45,17 @@ body {
 }
 
 .section {
-    padding: 120px 0;
+    padding-bottom: 120px;
+}
+
+.btn {
+    padding: 12px 32px;
+    font-size: 18px;
+    line-height: 1.2;
+    border-radius: 5px;
+    color: $white;
+    background-color: $orange;
+    transition: background-color 0.3s, box-shadow 0.3s, color 0.3s;
 }
 
 .animation-btn {
