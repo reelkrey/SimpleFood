@@ -4,6 +4,7 @@
 @import 'mixin';
 @import 'libs'; 
 @import 'global';
+@import 'mobile-menu';
 
 .logo {
     display: inline-block;
@@ -22,12 +23,32 @@
         opacity: 0.5;
         box-shadow: none;
     }
+
+    &__image--desktop {
+        @include mq('phone') {
+            width: 115px;
+            height: 23px;
+        }
+    }
 }
 
 .header__menu {
     display: flex;
     align-items: center;
     padding: 60px 0;
+    
+    @include mq('tablet-2') {
+        padding: 40px 0;
+    }
+
+    @include mq('tablet') {
+        justify-content: space-between;
+        padding: 30px 0;
+    }
+
+    @include mq('phone') {
+        padding: 25px 0;
+    }
 }
 
 .menu-nav {
@@ -47,39 +68,52 @@
     &__link {
         font-size: 18px;
         line-height: 1.1;
-        border-radius: 5px;
-        transition: box-shadow 0.3s, text-shadow 0.3s, color 0.3s;
 
         &--active {
             color: $orange;
         }
+    }
 
-        &:focus {
-            color: $dark;
-            background-color: $silver2;
-        }
-
-        &:hover {
-            color: $orange;
-            box-shadow: none;
-        }
-
-        &:active {
-            color: $dark;
-            text-shadow: 2px 2px 5px rgba(49, 53, 43, 0.5);
+    &--desktop {
+        @include mq('tablet') {
+            display: none;
         }
     }
 }
 
 .user-nav {
     display: flex;
+    align-items: center;
 
     &__item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         position: relative;
         height: 44px;
         width: 44px;
         border-radius: 5px;
         transition: background-color 0.3s, box-shadow 0.3s, filter 0.3s;
+
+        &::before {
+            @include pseudo;
+            @extend %bg;
+            width: 22px;
+            height: 22px;
+           
+        }
+
+        &--search {
+            &::before {
+                background-image: url('../images/sprite.svg#icon-search');
+            }
+        }
+
+        &--cart {
+            &::before {
+                background-image: url('../images/sprite.svg#icon-cart');
+            }
+        }
 
         &:not(:last-child) {
             margin-right: 20px;
@@ -87,7 +121,7 @@
 
         &:hover {
             background-color: $orange;
-        }
+        } 
 
         &:hover {
             &::before {
@@ -122,38 +156,26 @@
         height: 44px;
         border-radius: 5px;
         transition: box-shadow 0.3s;
-    }
 
-    &__item--search::before {
-        @include pseudo;
-        width: 22px;
-        height: 22px;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-image: url('../images/sprite.svg#icon-search');
-        @extend %bg;
-    }
+        &:focus {
+            background-color: rgba(255, 122, 80, 0.1);
+            color: $orange;
+            box-shadow: 0 0 0 2px $orange;
+        }
 
-    &__item--cart::before {
-        @include pseudo;
-        width: 22px;
-        height: 22px;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-image: url('../images/sprite.svg#icon-cart');
-        @extend %bg;
+        &:hover {
+            box-shadow: none;
+        }
     }
 
     &__num {
         position: absolute;
-        width: 14px;
-        height: 14px;
-        border-radius: 50%;
+        padding: 7px 4px;
+        line-height: 0;
+        border-radius: 100px;
         background-color: $orange;
-        top: 6px;
-        right: 5px;
+        top: 5px;
+        right: 3px;
         font-size: 10px;
         color: $white;
         transition: background-color 0.3s, color 0.3s;
@@ -163,23 +185,59 @@
 .hero {
 
     &__content {
+        position: relative;
         padding: 156px 0 170px;
         background-repeat: no-repeat;
         background-size: 560px 660px;
         background-position: right;
+        z-index: 1;
+
+        @include mq('tablet-2') {
+            padding: 120px 0 140px;
+            background-size: 450px 550px;
+        }
+        
+        @include mq('tablet') {
+            padding: 60px 0 80px;
+            background-size: 350px 430px;
+            &::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(249, 250, 255, 0.85);
+                z-index: -1;
+            }
+        }
+
+        @include mq('phone') {
+            padding: 15px 0 30px;
+            background-size: 255px 300px;
+        }
     }
 
     &__title {
-        max-width: 38%;
         margin-bottom: 20px;
         font-weight: 500;
-        color: $darkblue;
-        text-transform: uppercase;
         line-height: 1.3;
         font-size: 66px;
+        color: $darkblue;
+        text-transform: uppercase;
+        @include line-clamp (3);
+
+        @include mq('tablet-2') {
+            font-size: 50px;
+        }
+
+        @include mq('phone') {
+            font-size: 40px;
+        }
     }
 
     &__subtitle {
+        display: block;
         color: $orange;
     }
 
@@ -187,51 +245,47 @@
         p {
             max-width: 40%;
             margin-bottom: 20px;
-            @include line-clamp (3);
+            @include line-clamp (4);
+
+            @include mq('tablet-2') {
+                max-width: 50%;
+            }
+
+            @include mq('tablet') {
+                max-width: 60%;
+            }
+    
+            @include mq('phone') {
+                max-width: 100%;
+                font-size: 16px;
+            }
         }
+
     }
 
     &__button {
         margin-right: 35px;
 
-        &:focus {
-            color: $orange;
-        }
-
-        &:hover {
-            box-shadow: 0 5px 12px rgba(255, 104, 56, 0.2), 0 0 0 2px $orange;
-            color: $orange;
-        }
-
-        &:active {
-            box-shadow: none;
+        @include mq('phone') {
+            font-size: 14px;
+            padding: 8px 24px;
         }
     }
 
     &__link {
-        border-radius: 5px;
         text-decoration: underline;
-        color: $darkblue;
-        transition: box-shadow 0.3s, color 0.4s, text-shadow 0.3s;
-    }
-}
+        
+        &:focus {
+            text-decoration: none;
+        }
+    
+        &:hover {
+            text-decoration: none;
+        }
 
-.hero__link,
-.pop-categories__link{
-    &:focus {
-        box-shadow: 0 0 0 2px $orange;
-        text-decoration: none;
-    }
-
-    &:hover {
-        color: $orange;
-        text-decoration: none;
-    }
-
-    &:active {
-        color: $darkblue;
-        text-shadow: 2px 2px 5px rgba(54, 56, 83, 0.5);
-        box-shadow: none;
+        @include mq('phone') {
+            font-size: 16px;
+        }
     }
 }
 
@@ -240,11 +294,29 @@
 
     &__title {
         margin-bottom: 60px;
+
+        @include mq('tablet') {
+            margin-bottom: 30px;
+        }
     }
 
     &__filter {
         display: flex;
         margin-bottom: 45px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+
+        @include mq('desktop') {
+            padding-bottom: 15px;
+        }
+
+        @include mq('tablet') {
+            margin-bottom: 30px;
+        }
+
+        @include mq('phone') {
+            margin-bottom: 15px;
+        }
     }
 
     &__button {
@@ -252,17 +324,34 @@
         line-height: 1.3;
         color: $darkblue;
         background-color: $white;
+        border: 1px solid transparent;
         border-radius: 5px;
         box-shadow: 0 0 0 1px #ECECEC;
+        scroll-snap-align: start;
         &:not(:last-child) {
             margin-right: 20px;
+        }
+
+        @include mq('tablet') {
+            &:not(:last-child) {
+                margin-right: 10px;
+            }
         }
     }
 
     &__btn {
         padding: 22px 32px 22px 86px;
+        font-size: 20px;
+        line-height: 1.3;
         border-radius: 5px;
-        transition: box-shadow 0.3s, background-color 0.3s, color 0.3s;
+        background-color: transparent;
+        color: $darkblue;
+        white-space: nowrap;
+
+        @include mq('tablet'){  
+            padding: 12px 16px 12px 41px;
+            font-size: 14px;
+        }
 
         &::before {
             @include pseudo;
@@ -272,26 +361,42 @@
             width: 44px;
             height: 44px;
             @extend %bg;
+            transition: filter 0.3s;
+
+            @include mq('tablet') {
+                width: 22px;
+                height: 22px;
+            }
         }
 
-        &--burger::before {
-            background-image: url('../images/sprite.svg#icon-burger');
+        &--burger {
+            &::before {
+                background-image: url('../images/sprite.svg#icon-burger');
+            }
         }
 
-        &--pizza::before {
-            background-image: url('../images/sprite.svg#icon-pizza');
+        &--pizza {
+            &::before {
+                background-image: url('../images/sprite.svg#icon-pizza');
+            }
         }
 
-        &--sandwich::before {
-            background-image: url('../images/sprite.svg#icon-sandwich');
+        &--sandwich {
+            &::before {
+                background-image: url('../images/sprite.svg#icon-sandwich');
+            }
         }
 
-        &--asia::before {
-            background-image: url('../images/sprite.svg#icon-asia');
+        &--asia {
+            &::before {
+                background-image: url('../images/sprite.svg#icon-asia');
+            }
         }
 
-        &--set::before {
-            background-image: url('../images/sprite.svg#icon-set');
+        &--set {
+            &::before {
+                background-image: url('../images/sprite.svg#icon-set');
+        }
         }
 
         &:focus {
@@ -300,7 +405,7 @@
         }
 
         &:hover {
-            box-shadow: 0 0 0 2px $orange;
+            background-color: rgba(255, 122, 80, 0.1);
         }
 
         &:hover {
@@ -312,7 +417,6 @@
         &:active {
             background-color: $white;
             box-shadow: inset 0 -5px 12px rgba(255, 104, 56, 0.2);
-            color: $darkblue;
         }
 
         &:active {
@@ -324,19 +428,37 @@
 
     &__content {
         display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-        grid-gap: 2vw 2vw;
+        grid-template-columns: repeat(5, 1fr);
+        grid-gap: 30px;
         margin-bottom: 60px;
+
+        @include mq('tablet-2') {
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 20px;
+        }
+
+        @include mq('tablet') {
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        @include mq('phone') {
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 10px;
+            margin-bottom: 30px;
+        }
     }
 
     &__link {
-        color: $darkblue;
         text-decoration: underline;
-        border-radius: 5px;
-        transition: background-color 0.3s, box-shadow 0.3s, color 0.3s, text-shadow 0.3s;
-
+   
         &:hover {
-            box-shadow: none;
+            text-decoration: none;
+        }
+
+        &:active {
+            text-decoration: none;
         }
     }
 
@@ -356,7 +478,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    max-width: 210px;
+    max-width: 265px;
     height: 100%;
     width: 100%;
     padding: 20px 5px;
@@ -394,231 +516,397 @@
         padding: 7px 16px;
         font-size: 14px;
     }
-
-
 }
 
 .delivery {
 
     &__container {
-        max-width: 1030px;
+        max-width: 1050px;
         margin: 0 auto;
+        padding: 0 10px;
     }
 
     &__wrapper {
-        background-size: 440px 485px;
+        position: relative;
+        z-index: 1;
+        background-size: 440px 590px;
         background-repeat: no-repeat;
         background-position: left;
+
+        @include mq('tablet-2') {
+            background-size: 390px 500px;
+        }
+
+        @include mq('tablet') {
+            background-size: 345px 462px;
+            &::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(249, 250, 255, 0.85);
+                z-index: -1;
+            }
+        }
     }
 
     &__content {
-        padding: 16px 0;
-        max-width: 470px;
+        position: relative;
+        padding: 70px 0;
+        max-width: 45%;
         margin-left: auto;
+
+        @include mq('tablet-2') {
+            padding: 50px 0;
+            max-width: 50%;
+        }
+
+        @include mq('tablet') {
+            text-align: center;
+            max-width: 100%;
+            padding: 60px 0;
+        }
+
+        @include mq('phone') {
+            padding: 30px 0;
+            text-align: left;
+            max-width: 100%;
+        }
    }
 
-   &__span {
-        display: block;
-   }
-
-   &__text {
+   &__title {
     @include line-clamp (3);
    }
 
-   &__title,
-   &__text,
-   &__items {
-        margin-bottom: 30px;
-   }
+   &__text {
+        @include line-clamp (6);
 
-   &__item:not(:last-child) {
-    margin-bottom: 20px;
-   }
+        @include mq('phone') {
+        font-size: 16px;
+        }
+    }
 
-   &__info {
+    &__title,
+    &__text,
+    &__items {
+         margin-bottom: 30px;
+    }
+
+    &__items {
+        @include mq('tablet') {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @include mq('phone') {
+            text-align: left;
+            justify-content: left;
+            align-items: flex-start;
+        }
+    }
+
+    &__item {
+        display: inline-block;
         position: relative;
-        font-weight: 400;
-        font-size: 24px;
-        padding-left: 64px;
         &::before {
-           @include pseudo;
+            @include pseudo;
+            @extend %bg;
             top: 0;
             left: 0;
             width: 34px;
             height: 34px;
         }
-        &--timer::before {
-            background-image: url('../images/sprite.svg#icon-timer');
+        &--timer {
+            &::before {
+                background-image: url('../images/sprite.svg#icon-timer');
         }
-        &--delivery::before {
-            background-image: url('../images/sprite.svg#icon-delivery');
         }
-        &--resturent::before {
-            background-image: url('../images/sprite.svg#icon-resturent');
+        &--delivery {
+            &::before {
+                background-image: url('../images/sprite.svg#icon-delivery');
         }
-   }
+        }
+        &--resturent {
+            &::before {
+                background-image: url('../images/sprite.svg#icon-resturent');
+        }
+        }
 
+        &:not(:last-child) {
+             margin-bottom: 20px;
+        }
 
+        & p {
+            font-weight: 400;
+            font-size: 24px;
+            padding-left: 64px;
+
+            @include mq('tablet-2') {
+                font-size: 20px;
+            }
+
+            @include mq('tablet') {
+                font-size: 18px;
+            }
+        }
+    }
+
+    &__link {
+        font-size: 14px;
+    }
 }
 
-.restaurant {
+.restaurants {
     
     &__title {
         margin-bottom: 45px;
         text-align: center;
+
+        @include mq('tablet') {
+            margin-bottom: 30px;
+        }
     }
 
     &__list {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-gap: 30px;
+
+        @include mq('tablet-2') {
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 30px;
+            justify-items: center;
+        }
+
+        @include mq('phone') {
+            display: block;
+            
+            .slick-dots {
+                position: relative;
+                display: flex;
+                justify-content: center;
+                
+                li {
+                    width: 15px;
+                    height: 15px;
+                    border-radius: 50%;
+                    font-size: 0;
+                    background-color: $gray;
+                    transition: background-color 0.3s, box-shadow 0.3s;
+                    
+                    &:not(:last-child) {
+                        margin-right: 15px;
+                    }
+                     
+                     &.slick-active {
+                         background-color: $orange;
+                    }   
+                     &:focus {
+                         background-color: $gray;
+                         box-shadow: 0px 0px 0px 2px #FF6838;  
+                    }
+                     
+                     &:hover {
+                         background-color: #FFF2ED;
+                         box-shadow: 0 0 0 2px $orange;
+                    }
+                     &:active {
+                         background-color: #FFAE94;
+                         box-shadow: none;
+                    }
+                }
+            }
+
+            .slick-slide {
+                display: flex;
+                justify-content: center;
+                margin-bottom: 30px;
+            }
+        }
+    }
+}
+
+.restaurant-card { 
+    max-width: 370px;
+    width: 100%;
+    background-color: $white;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    transition: box-shadow 0.3s;
+    &:hover {
+        box-shadow: 0px 3px 15px rgba(255, 104, 56, 0.5);
     }
 
-    &__item {
-        background-color: $white;
-        box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
+    &__image {
+        border-radius: 10px 10px 0 0;       
+        @extend %bg;
     }
-    &-card {
-        &__image {
-            margin-bottom: 15px;
-            width: 370px;
-            height: 300px;
-            @extend %bg;
+
+    &__content {
+        padding: 15px 20px 20px 20px;
+    }
+    
+    &__name {
+        @include line-clamp (2);
+        font-weight: 400;
+        font-style: 24px;
+        line-height: 1.3;
+        margin-bottom: 20px;
+    }
+
+    &__inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__time {
+        position: relative;
+        display: inline-block;
+        padding-left: 31px;
+        font-weight: 300;
+        font-size: 18px;
+        line-height: 1.6;
+
+        &::before {
+            @include pseudo;
+            width: 22px;
+            height: 22px;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            background-image: url('../images/sprite.svg#icon-clocks');
         }
+    }
+
+    &__link {
+        position: relative;
+        padding: 15px 35px;
+        border-radius: 20px;
         
-        &__name {
-            font-weight: 400;
-            font-style: 24px;
-            line-height: 1.3;
-            margin: 15px 0 20px 20px;
+        &::before {
+            @include pseudo;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 15px;
+            height: 14px;
+            background-image: url('../images/sprite.svg#icon-restaurant-arrow');
+            @extend %bg;
+            transition: transform 0.3s;
         }
 
-        &__inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        &__time {
-            position: relative;
-            display: inline-block;
-            margin: 0 100px 23px 20px;
-            padding-left: 31px;
-            font-weight: 300;
-            font-size: 18px;
-            line-height: 1.6;
-
+        &:focus {
             &::before {
-                @include pseudo;
-                width: 22px;
-                height: 22px;
-                top: 50%;
-                left: 0;
-                transform: translateY(-50%);
-                background-image: url('../images/sprite.svg#icon-clocks');
+                filter: invert(57%) sepia(76%) saturate(3434%) hue-rotate(337deg) brightness(102%) contrast(103%);
             }
         }
 
-        &__btn {
-            position: relative;
-            width: 79px;
-            height: 33px;
-            border-radius: 20px;
-            background-color: $orange;
-            transform: translateY(-20%);
-            transition: background-color 0.3s, box-shadow 0.3s;
+        &:hover {
             &::before {
-                @include pseudo;
-                top: 50%;
-                left: 50%;
+                filter: invert(57%) sepia(76%) saturate(3434%) hue-rotate(337deg) brightness(102%) contrast(103%);
+                transform: translate(50%, -50%);
+            }
+        }
+
+        &:active {
+            &::before {
+                filter: invert(57%) sepia(76%) saturate(3434%) hue-rotate(337deg) brightness(102%) contrast(103%);
                 transform: translate(-50%, -50%);
-                width: 15px;
-                height: 14px;
-                background-image: url('../images/sprite.svg#icon-restaurant-arrow');
-                @extend %bg;
-            }
-
-            &:focus {
-                background-color: #FFF2ED;
-                box-shadow: 0 0 0 2px $orange;
-            }
-
-            &:focus {
-                &::before {
-                    filter: invert(57%) sepia(76%) saturate(3434%) hue-rotate(337deg) brightness(102%) contrast(103%);
-                }
-            }
-
-            &:hover {
-                background-color: $white;
-                box-shadow: 0 0 0 2px $orange;
-            }
-
-            &:hover {
-                &::before {
-                    filter: invert(57%) sepia(76%) saturate(3434%) hue-rotate(337deg) brightness(102%) contrast(103%);
-                    transform: translate(50%, -50%);
-                }
-            }
-
-            &:active {
-                background-color: #FFF2ED;
-                box-shadow: none;
-                &::before {
-                    transform: translate(-50%, -50%);
-                }   
-            }
+            }   
         }
     }
 }
 
 .reviews {
     &__container {
-        max-width: 990px;
+        max-width: 1020px;
         margin: 0 auto;
+        padding: 0 15px;
     }
     &__title {
         margin-bottom: 45px;
         text-align: center;
+
+        @include mq('tablet') {
+            margin-bottom: 30px;
+        }
     }
 
     &__item {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding-right: 40px;
-        padding-bottom: 50px;
+        padding: 0 40px 30px;
+
+        @include mq('tablet-2') {
+            flex-direction: column;
+        }
+
+        @include mq('phone') {
+             padding-bottom: 0;
+        }
     }
 
     &__image {
         border-radius: 50%;
+
+        @include mq('tablet-2') {
+            margin-bottom: 30px;
+            max-width: 250px;
+            max-height: 250px;
+        }
+
+        @include mq('tablet') {
+            max-width: 150px;
+            max-height: 150px;
+        }
+
+        @include mq('phone') {
+            max-width: 100px;
+            max-height: 100px;
+        }
     }
 
     &__blockquote {
-        position: relative;
-        max-width: 570px;
-        font-style: italic;
+        & p {
+            position: relative;
+            max-width: 570px;
+            font-style: italic;
 
-        &::before,
-        &::after {
-            @include pseudo;
-            width: 24px;
-            height: 20px;
-            background-image: url('../images/sprite.svg#icon-quotes');
-            @extend %bg;
-        }
+            @include mq('tablet') {
+                font-size: 17px;
+            }
 
-        &::before {
-            top: 0;
-            left: 0;
-            transform: translateX(-150%);
-        }
-
-        &::after {
-            bottom: 50%;
-            right: 0;
-            transform: rotate(180deg) translate(-150%, -150%) scale(1, -1);
+            @include mq('phone') {
+                max-width: 265px;
+                font-size: 14px;
+            }
+    
+            &::before,
+            &::after {
+                @include pseudo;
+                width: 24px;
+                height: 20px;
+                background-image: url('../images/sprite.svg#icon-quotes');
+                @extend %bg;
+            }
+    
+            &::before {
+                top: 0;
+                left: 0;
+                transform: translateX(-150%);
+            }
+    
+            &::after {
+                bottom: 0;
+                right: 0;
+                transform: rotate(180deg) translateX(-150%) scale(1, -1);
+            }
         }
     }
 
@@ -629,6 +917,11 @@
         font-style: normal;
         line-height: 1.3;
         color: $orange;
+
+        @include mq('phone') {
+            padding-top: 20px;
+            font-size: 16px;
+        }
     }
 
     &__span {
@@ -640,61 +933,25 @@
         color: $dark;
     }
 
-    .slick {
-        &-dots {
-           position: relative;
-           display: flex;
-           justify-content: center;
-           
-           li {
-               width: 15px;
-               height: 15px;
-               border-radius: 50%;
-               font-size: 0;
-               background-color: $gray;
-               transition: background-color 0.3s, box-shadow 0.3s;
-               
-               &:not(:last-child) {
-                   margin-right: 15px;
-                }
-                
-                &.slick-active {
-                    background-color: $orange;
-                }   
+    &-arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 37px;
+        height: 37px;
+        border: 3px solid $gray;
+        border-radius: 50%;
+        z-index: 1;
 
-                &:focus {
-                    background-color: $gray;
-                    box-shadow: 0px 0px 0px 2px #FF6838;  
-                }
-                
-                &:hover {
-                    background-color: #FFF2ED;
-                    box-shadow: 0 0 0 2px $orange;
-                }
-
-                &:active {
-                    background-color: #FFAE94;
-                    box-shadow: none;
-                }
-            }
-        }
-
-        &-arrow {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 37px;
-            height: 37px;
-            border: 3px solid $gray;
-            border-radius: 50%;
-            z-index: 1;
-        }
-
-        &-prev,
-        &-next {
+        &--prev,
+        &--next {
             position: absolute;
             bottom: -10px;
             transition: box-shadow 0.3s, background-color 0.3s;
+
+            @include mq('tablet-2') {
+                top: 30%;
+            }
 
             &.slick-disabled {
                 border-color: $orange;
@@ -732,44 +989,170 @@
             }
         }
 
-        &-prev {
+        &--prev {
             left: 40%;
             transform: translateX(-50%);
+
+            @include mq('tablet-2') {
+                left: 20%;
+                transform: translateY(-150%);
+            }
+
+            @include mq('tablet') {
+                transform: translateY(-200%);
+            }
+
+            @include mq('phone') {
+                left: 10%;
+                transform: translateY(-250%);
+            }
         }
 
-        &-next {
+        &--next {
             right: 40%;
             transform: translateX(50%) scale(-1);
+
+            @include mq('tablet-2') {
+                right: 20%;
+                transform: translateY(-150%) scale(-1);
+            }
+
+            @include mq('tablet') {
+                transform: translateY(-200%) scale(-1);
+            }
+
+            @include mq('phone') {
+                right: 10%;
+                transform: translateY(-250%) scale(-1);
+            }
+        }
+    }
+
+    .slick-dots {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        
+        li {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            font-size: 0;
+            background-color: $gray;
+            transition: background-color 0.3s, box-shadow 0.3s;
+
+            @include mq('tablet-2') {
+                display: none;
+            }
+     
+            
+            &:not(:last-child) {
+                margin-right: 15px;
+            }
+             
+             &.slick-active {
+                 background-color: $orange;
+            }   
+             &:focus {
+                 background-color: $gray;
+                 box-shadow: 0px 0px 0px 2px #FF6838;  
+            }
+             
+             &:hover {
+                 background-color: #FFF2ED;
+                 box-shadow: 0 0 0 2px $orange;
+            }
+             &:active {
+                 background-color: #FFAE94;
+                 box-shadow: none;
+            }
         }
     }
 }
 
 .app {
     &__wrapper {
+        position: relative;
         background-size: 570px 380px;
         background-position: right;
         background-repeat: no-repeat;
+        z-index: 1;
+
+        @include mq('desktop') {
+            &::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(249, 250, 255, 0.85);
+                z-index: -1;
+            }
+        }
+
+        @include mq('phone') {
+            background-size: 0;
+        }
     }
 
     &__content {
-        max-width: 538px;
+        max-width: 40%;
         padding: 40px 0;
+
+        @include mq('tablet-2') {
+            max-width: 50%;
+        }
+
+        @include mq('tablet') {
+            max-width: 60%;
+        }
+
+        @include mq('phone') {
+            max-width: 100%;
+            padding: 0;
+        }
     }
 
     &__title {
         margin-bottom: 45px;
+
+        @include mq('tablet') {
+            margin-bottom: 30px;
+        }
+
+        @include mq('phone') {
+            margin-bottom: 15px;
+        }
     }
 
     &__text {
         & p {
             @include line-clamp (6);
             margin-bottom: 30px;
+
+            @include mq('phone') {
+                font-size: 14px;
+                margin-bottom: 15px;
+            }
+        }
+    }
+
+    &__list {
+        display: flex;
+    }
+
+    &__item {
+        &:not(:last-child) {
+            margin-right: 30px;
         }
     }
 
     &__image {
-        display: inline-block;
-        margin-right: 30px;
+        @include mq('phone') {
+            max-width: 120px;
+            border-radius: 10px;
+        }
     }
 }
 
@@ -777,61 +1160,67 @@
     &__top {
         display: grid;
         grid-template-columns: 1fr 2fr 1fr;
-        padding-bottom: 66px;
+        grid-column-gap: 2px;
+        padding-bottom: 60px;
+        justify-items: center;
+
+        @include mq('tablet-2') {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            align-items: center;
+        }
+        
+        @include mq('phone') {
+            text-align: left;
+            align-items: flex-start;
+            padding-bottom: 30px;
+        }
     }
 
     &__subscribe {
-        margin-right: 70px;
+        @include mq('tablet-2') {
+            margin-bottom: 30px;
+        }
     }
 
     &__logo {
         margin-bottom: 20px;
     }
 
-    &__menu {
-        &-list {
-            column-count: 3;
-        }
-        
-        &-item {
-            font-size: 18px;
-            line-height: 1.3;
+    &__menu-list {
+        column-count: 3;
+
+        @include mq('tablet-2') {
             margin-bottom: 20px;
         }
 
-        &-link {
-            border-radius: 5px;
-            transition: border-radius 0.3s, color 0.3s, box-shadow 0.3s;
-            @include line-clamp (1);
-    
-            &:focus {
-                color: $dark;
-                background-color: $silver2;
-            }
-    
-            &:hover {
-                box-shadow: none;
-            }
-    
-            &:active {
-                color: $dark;
-                text-shadow: 2px 2px 5px rgba(49, 53, 43, 0.5);
-            }
+        @include mq('tablet') {
+            display: flex;
+            flex-direction: column;
+            order: 1;
+            margin-bottom: 0;
         }
     }
-    
-    &__bottom {
-        padding: 30px 0;
-        text-align: center;
+
+    &__menu-item {
+        font-size: 18px;
+        line-height: 1.3;
+        margin-bottom: 20px;
     }
 
-    &__copyright {
-        font-size: 14px;
-        line-height: 1;
+    &__menu-link {
+        @include line-clamp (1);
     }
 
     &__contacts {
-        margin-left: 30px;
+        @include mq('tablet') {
+            margin-bottom: 30px;
+        }
+
+        @include mq('phone') {
+            margin-bottom: 20px;
+        }
     }
 
     &__btn {
@@ -847,18 +1236,10 @@
             filter: invert(51%) sepia(36%) saturate(3299%) hue-rotate(337deg) brightness(102%) contrast(101%);
         }
     
-        &:hover {
-            background-color: $white;
-        }
-    
         &:hover::before {
             filter: invert(51%) sepia(36%) saturate(3299%) hue-rotate(337deg) brightness(102%) contrast(101%);
         }
-    
-        &:active {
-            background-color: rgba(255, 122, 80, 0.1);
-        }
-    
+
         &::before {
             @include pseudo;
             top: 50%;
@@ -872,6 +1253,21 @@
     }
 }
 
+.footer-copyright {
+    padding: 20px;
+    border-top: 1px solid $gray;
+    text-align: center;
+
+    @include mq('phone') {
+        padding: 10px;
+    }
+
+    &__text {
+        font-size: 14px;
+        line-height: 1;
+    }
+}
+
 .form-subscribe {
     &__input {
         max-width: 200px;
@@ -882,7 +1278,7 @@
         border-radius: 5px;
         line-height: 1.3;
         font-size: 14px;
-        transition: border 0.3s, color 0.3s, opacity 0.3s;
+        transition: color 0.3s, opacity 0.3s, box-shadow 0.3s;
     
         &::placeholder {
             color: $gray;
@@ -890,22 +1286,20 @@
         }
     
         &:focus {
-            border-radius: 5px;
-            background-color: $silver2;
-        }
-    
-        &:hover {
-            box-shadow: none;
+            background-color: transparent;
         }
     
         &:hover::placeholder {
             color: $darkblue;
-            opacity: 0.9;
         }
     }
 }
 
 .contacts {
+
+    @include mq('tablet') {
+        margin-bottom: 20px;
+    }
     &__item {
         position: relative;
         margin-bottom: 15px;
@@ -918,6 +1312,7 @@
     
     &__link {
         border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
         &::before {
             @include pseudo;
             width: 24px;
@@ -928,37 +1323,38 @@
             @extend %bg;
         }
         
-        &--address::before {
-            background-image: url('../images/sprite.svg#icon-location');
+        &--address {
+            &::before {
+                background-image: url('../images/sprite.svg#icon-location');
+        }
         }
         
-        &--number::before {
-            background-image: url('../images/sprite.svg#icon-call');
+        &--number {
+            &::before {
+                background-image: url('../images/sprite.svg#icon-call');
+        }
         }
         
-        &--email::before {
-            background-image: url('../images/sprite.svg#icon-message');
+        &--email {
+            &::before {
+                background-image: url('../images/sprite.svg#icon-message');
         }
-    
-        &:focus {
-            color: $dark;
-            background-color: $silver2;
-        }
-    
-        &:hover {
-            color: $orange;
-            box-shadow: none;
-        }
-    
-        &:active {
-            color: $dark;
-            text-shadow: 2px 2px 5px rgba(49, 53, 43, 0.5);
         }
     }
 }
 
-.socials {
+.social-contacts {
     display: flex;
+
+    &--desktop {
+        @include mq('tablet-2') {
+            justify-content: center;
+        }
+    
+        @include mq('phone') {
+            justify-content: flex-start;
+        }
+    }
 
     &__item {
         &:not(:last-child) {
@@ -970,6 +1366,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        @extend %bg;
         width: 40px;
         height: 40px;
         border-radius: 50%;
@@ -980,13 +1377,17 @@
             margin-right: 13px;
         }
 
+        &:focus {
+            box-shadow: 0 0 0 2px $orange;
+        }
+
         &:hover {
             background-color: $orange;
             box-shadow: none;
         }
     
         &:hover {
-            svg use {
+            svg {
                 filter: invert(99%) sepia(33%) saturate(0%) hue-rotate(286deg) brightness(109%) contrast(101%);
             }
         }
@@ -996,10 +1397,15 @@
         }
     
         &:active {
-            svg use {
+            svg {
                 filter: invert(59%) sepia(17%) saturate(6104%) hue-rotate(329deg) brightness(111%) contrast(108%);
             }
         }
+
+        // &--facebook {
+        //     width: 10px;
+        //     height: 21px;
+        // }
     }
 
     &__image {

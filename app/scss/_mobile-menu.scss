@@ -1,0 +1,73 @@
+.mobile-menu {
+    display: none;
+    @include mq('tablet') {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 85%;
+        height: 100vh;
+        overflow-y: auto;
+        padding-left: 15px;
+        background-color: $white;
+        transform: translateX(-200%);
+        transition: transform 0.5s;
+        z-index: 2;
+
+        &--active {
+            transform: translateX(0);
+        }
+    }
+
+    &__inner {
+        padding-right: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+.logo--mobile {
+    @include mq('tablet') {
+        margin: 30px 0;
+    }
+}
+
+.logo__image--mobile {
+    @include mq('tablet') {
+        width: 200px;
+        height: 39px;
+    }
+}
+
+.menu-nav--mobile {
+    @include mq('tablet') {
+        display: flex;
+        flex-direction: column;
+        padding: 30px 0;
+        border-top: 1px solid $gray;
+    }
+}
+
+.menu-nav__item--mobile {
+    &:not(:last-child) {
+        @include mq('tablet') {
+            margin-bottom: 20px;
+        }
+    }
+}
+
+.footer__contacts--mobile {
+    @include mq('tablet') {
+        padding: 30px 0;
+        border-top: 1px solid $gray;
+    }
+}
+
+.social-contacts--mobile {
+    @include mq('tablet') {
+        justify-content: flex-start;
+    }
+}
+
+
