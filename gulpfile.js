@@ -32,6 +32,8 @@ function scripts() {
         'node_modules/jquery/dist/jquery.js', 
         'node_modules/mixitup/dist/mixitup.js',
         'node_modules/slick-carousel/slick/slick.js',
+        'node_modules/jquery-form-styler/dist/jquery.formstyler.js',
+        'node_modules/ion-rangeslider/js/ion.rangeSlider.js',
         'app/js/main.js'])
     .pipe(concat('main.min.js'))
     .pipe(uglify())
@@ -69,17 +71,17 @@ function cleanDist() {
 }
 
 function svgSprites() {
-    return src('app/images/icons/*.svg')
+    return src('app/images/icons/*.svg') 
     .pipe(
-        svgSprite({
-          mode: {
-            stack: {
-              sprite: '../sprite.svg',
+          svgSprite({
+            mode: {
+              stack: {
+                sprite: '../sprite.svg', 
+              },
             },
-          },
-        })
-      )
-    .pipe(dest('app/images'));
+          })
+        )
+    .pipe(dest('app/images')); 
 }
 
 const htmlInclude = () => {
@@ -110,4 +112,4 @@ exports.svgSprites   = svgSprites;
 exports.htmlInclude  = htmlInclude;
 exports.build        = series(cleanDist, images, build);
 
-exports.default      = parallel(htmlInclude, svgSprites, styles, scripts, browsersync, watching);
+exports.default      = parallel(htmlInclude, svgSprites, styles, scripts, browsersync, watching,);

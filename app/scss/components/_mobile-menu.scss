@@ -1,0 +1,64 @@
+.mobile-menu {
+    display: none;
+    @include mq('tablet') {
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 85%;
+        height: 100vh;
+        overflow-y: auto;
+        background-color: $white;
+        transform: translateX(-200%);
+        transition: transform 0.5s;
+        z-index: 2;
+
+        &--active {
+            transform: translateX(0);
+        }
+    }
+
+    &__inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 25px 15px;
+    }
+
+    .logo__image {
+            width: 200px;
+            height: 39px;
+    }
+
+    .menu-nav {
+        @include mq('tablet') {
+            display: flex;
+            flex-direction: column;
+            padding: 25px 15px;
+            border-top: 1px solid rgba(194,194,194,0.2);
+        }
+    }
+
+    .menu-nav__item {
+        &:not(:last-child) {
+            @include mq('tablet') {
+                margin-bottom: 20px;
+            }
+        }
+    }
+
+    .mobile-menu__contacts {
+        @include mq('tablet') {
+            padding: 25px 15px;
+            border-top: 1px solid rgba(194,194,194,0.2);
+        }
+    }
+
+    .social-contacts {
+        @include mq('tablet') {
+            justify-content: flex-start;
+        }
+    }
+}
+
+

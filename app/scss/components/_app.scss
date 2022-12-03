@@ -1,0 +1,85 @@
+.app {
+    &__wrapper {
+        position: relative;
+        background-size: 570px 380px;
+        background-position: right;
+        background-repeat: no-repeat;
+        z-index: 1;
+
+        @include mq('desktop') {
+            &::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(249, 250, 255, 0.85);
+                z-index: -1;
+            }
+        }
+
+        @include mq('phone') {
+            background-size: 0;
+        }
+    }
+
+    &__content {
+        max-width: 40%;
+        padding: 40px 0;
+
+        @include mq('tablet-2') {
+            max-width: 50%;
+        }
+
+        @include mq('tablet') {
+            max-width: 60%;
+        }
+
+        @include mq('phone') {
+            max-width: 100%;
+            padding: 0;
+        }
+    }
+
+    &__title {
+        margin-bottom: 45px;
+
+        @include mq('tablet') {
+            margin-bottom: 30px;
+        }
+
+        @include mq('phone') {
+            margin-bottom: 15px;
+        }
+    }
+
+    &__text {
+        & p {
+            @include line-clamp (6);
+            margin-bottom: 30px;
+
+            @include mq('phone') {
+                font-size: 14px;
+                margin-bottom: 15px;
+            }
+        }
+    }
+
+    &__list {
+        display: flex;
+    }
+
+    &__item {
+        &:not(:last-child) {
+            margin-right: 30px;
+        }
+    }
+
+    &__image {
+        @include mq('phone') {
+            max-width: 120px;
+            border-radius: 10px;
+        }
+    }
+}

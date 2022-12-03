@@ -1,0 +1,35 @@
+.breadcrumbs {
+    background-color: rgba(255, 122, 80, 0.1);
+    padding: 24px 0;
+    margin-bottom: 60px;
+
+    &__list {
+        display: flex;
+    }
+
+    &__item {
+        &:not(:last-child) {
+            margin-right: 5px;
+            position: relative;
+            
+            &::after { 
+                position: absolute; 
+                content: "";
+                top: 50%;
+                right: 0;
+                transform: translateY(-25%);
+                width: 6px;
+                height: 10px;
+                background-image: url('../images/sprite.svg#icon-chevron');
+                @extend %bg;
+                filter: invert(90%) sepia(0%) saturate(151%) hue-rotate(243deg) brightness(89%) contrast(87%);
+            }
+        }
+    }
+
+    &__link {
+        padding-right: 12px;
+        font-size: 14px;
+        color: #505050;
+    }
+}

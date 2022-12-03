@@ -1,0 +1,81 @@
+.burger {
+	display: none;
+
+	@include mq('tablet') {
+		display: block;
+	}
+
+	z-index: 3;
+	position: relative;
+	width: $burgerWidth;
+	height: $burgerHeight; 
+	color: $burgerColor; 
+
+	&__line {
+		position: absolute;
+		left: 15%;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 30px;
+		height: $burgerLineHeight; 
+		background-color: currentColor;
+		transition: transform 0.3s ease-in-out;
+	}
+
+	&::before,
+	&::after {
+		content: "";
+		position: absolute;
+		left: 15%;
+		width: 30px;
+		height: $burgerLineHeight;
+		background-color: currentColor;
+		transition: transform 0.3s ease-in-out, top 0.3s ease-in-out;
+	}
+
+	&::before {
+		top: 10px;
+	}
+
+	&::after {
+		bottom: 10px;
+	}
+
+	&--active {
+		.burger__line {
+			transform: scale(0);
+			transition: transform 0.3s ease-in-out;
+		}
+
+		&::before {
+			transform: rotate(45deg);
+			top: 50%;
+			transition: transform 0.3s ease-in-out, top 0.3s ease-in-out;
+		}
+
+		&::after {
+			transform: rotate(-45deg);
+			top: 50%;
+			transition: transform 0.3s ease-in-out, top 0.3s ease-in-out;
+		}
+	}
+}
+
+.burger-mobile {
+    @include mq('tablet') {
+        .burger__line {
+            display: none;
+        }
+        &::before {
+			transform: rotate(45deg);
+			top: 50%;
+			transition: transform 0.3s ease-in-out, top 0.3s ease-in-out;
+		}
+
+		&::after {
+			transform: rotate(-45deg);
+			top: 50%;
+			transition: transform 0.3s ease-in-out, top 0.3s ease-in-out;
+		}
+    }
+}
