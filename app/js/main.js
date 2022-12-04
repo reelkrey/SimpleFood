@@ -40,17 +40,48 @@ $(function(){
       $('.restaurants__list.slick-initialized').slick('unslick');
     }
   });
-});
-  
-var mixer = mixitup('.pop-categories__content');
 
+  $(window).on('load resize', function () {
+    if ($(window).width() < 576) {
+      $('.discount__list').slick({
+        centerMode: false,
+        prevArrow: false,
+        nextArrow: false,
+        dots: true,
+        infinite: true,
+        speed: 100,
+        slidesToShow: 1
+      });
+    } else {
+      $('.discount__list.slick-initialized').slick('unslick');
+    }
+  });
+});
+
+const filterMenu = document.querySelector('.filter-menu');
+const filterBtn = document.querySelector('.filter-btn');
+const filterClose = document.querySelector('.filter-close');
 const mobileMenu = document.querySelector('.mobile-menu');
 const burger = document.querySelector('.burger');
 const bodyLock = document.querySelector('body');
 const burgerClose = document.querySelector('.burger-mobile');
 
+
 document.addEventListener('DOMContentLoaded', () => {
 
+  filterBtn.addEventListener('click',  () => {
+    filterMenu.classList.add('filter-menu--active');
+    bodyLock.classList.add('lock');
+  });
+
+  filterClose.addEventListener('click', () => {
+    filterMenu.classList.remove('filter-menu--active');
+    bodyLock.classList.remove('lock');
+  });
+
+});
+
+document.addEventListener('DOMContentLoaded', () => {
   burger.addEventListener('click',  () => {
     mobileMenu.classList.add('mobile-menu--active');
     bodyLock.classList.add('lock');
@@ -60,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileMenu.classList.remove('mobile-menu--active');
     bodyLock.classList.remove('lock');
   });
+  
 });
 
 document.addEventListener('click', e => {
@@ -73,6 +105,5 @@ document.addEventListener('click', e => {
     bodyLock.classList.remove('lock');
   }
 })
-  
-  
 
+var mixer = mixitup('.pop-categories__content');

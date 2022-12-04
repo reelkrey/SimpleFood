@@ -1,0 +1,53 @@
+.filter {
+    &-menu {
+        display: none;
+        @include mq('tablet') {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 85%;
+            height: 100vh;
+            overflow-y: auto;
+            background-color: $white;
+            transform: translateX(-200%);
+            transition: transform 0.5s;
+            z-index: 999;
+    
+            &--active {
+                transform: translateX(0);
+            }
+        }
+
+        .filter__item {
+            max-width: 270px;
+
+            &:last-child {
+                margin-bottom: 30px;
+            }
+        }
+    }
+
+    &-btn {
+        width: 47px;
+        height: 47px;
+        margin-right: 10px;
+        background-color: #FAEDED;
+        background-image: url('../images/sprite.svg#icon-catalog-filter');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 32px 34px;
+    }
+
+    &-close {
+        display: block;
+        margin: 20px 20px 20px auto;
+        width: 47px;
+        height: 47px;
+        background-color: #FAEDED;
+        background-image: url('../images/sprite.svg#icon-filter-close');
+        background-size: 18px 18px;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+}

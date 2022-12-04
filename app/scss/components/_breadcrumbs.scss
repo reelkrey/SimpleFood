@@ -1,7 +1,11 @@
 .breadcrumbs {
     background-color: rgba(255, 122, 80, 0.1);
-    padding: 24px 0;
+    padding: 15px 0;
     margin-bottom: 60px;
+
+    @include mq('phone') {
+        margin-bottom: 45px;
+    } 
 
     &__list {
         display: flex;
@@ -30,6 +34,7 @@
     &__link {
         padding-right: 12px;
         font-size: 14px;
+        letter-spacing: 0.03em;
         color: #505050;
     }
 }

@@ -1,0 +1,7 @@
+.filter-btn {
+    display: none;
+
+    @include mq('tablet') {
+        display: block;
+    }
+}

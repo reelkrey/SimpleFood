@@ -27,6 +27,13 @@
 
     &__logo {
         margin-bottom: 20px;
+
+        &-image {
+            @include mq('phone') {
+                width: 200px;
+                height: 39px;
+            }
+        }
     }
 
     &__menu-list {

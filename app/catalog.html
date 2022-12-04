@@ -55,7 +55,75 @@
 </header>
 
 <main class="main">
-
+<div class="mobile-menu">
+    <div class="mobile-menu__inner">
+        <a class="logo" href="#body">
+            <img class="logo__image " src="images/logo.svg" width="200" height="39" alt="Логотип">
+        </a>
+        <button class="burger burger-mobile" type="button">
+            <span class="burger__line">
+                <span class="sr-only">Кнопка меню</span>
+            </span>
+        </button>
+    </div>
+    <ul class="menu-nav">
+        <li class="menu-nav__item">
+            <a class="menu-nav__link animation-btn menu-nav__link--active" href="#">Главная</a>
+        </li>
+        <li class="menu-nav__item">
+            <a class="menu-nav__link animation-btn" href="#">Блюда</a>
+        </li>
+        <li class="menu-nav__item">
+            <a class="menu-nav__link animation-btn" href="#">Контакты</a>
+        </li>
+    </ul>
+    <address class="mobile-menu__contacts">
+        <ul class="contacts">
+            <li class="contacts__item">
+                <a class="contacts__link contacts__link--address animation-btn" href="">
+                    ул. Т.Г.Шевченко, 1
+                </a>
+            </li>
+            <li class="contacts__item">
+                <a class="contacts__link contacts__link--number animation-btn" href="tel:+380501112233">
+                    380501112233
+                </a>
+            </li>
+            <li class="contacts__item">
+                <a class="contacts__link contacts__link--email animation-btn" href="mailto:support@sfood.com">
+                    support@sfood.com
+                </a>
+            </li>
+        </ul>
+        <ul class="social-contacts">
+            <li class="social-contacts__item">
+                <a class="social-contacts__link" href="#" target="_blank">
+                    <svg class="social-contacts__image social-contacts__image--facebook">
+                        <use xlink:href="images/sprite.svg#icon-facebook"></use>
+                    </svg>
+                    <span class="sr-only">Написать нам в Фейсбук</span>
+                </a>
+            </li>
+            <li class="social-contacts__item">
+                <a class="social-contacts__link" href="#" target="_blank">
+                    <svg class="social-contacts__image social-contacts__image--twitter">
+                        <use xlink:href="images/sprite.svg#icon-twitter"></use>
+                    </svg>
+                    <span class="sr-only">Написать нам в Твиттер</span>
+                </a>
+            </li>
+            <li class="social-contacts__item">
+                <a class="social-contacts__link" href="#" target="_blank">
+                    <svg class="social-contacts__image social-contacts__image--instagram">
+                        <use xlink:href="images/sprite.svg#icon-instagram"></use>
+                    </svg>
+                    <span class="sr-only">Написать нам в Инстаграм</span>
+                </a>
+            </li>
+        </ul>
+    </address>
+</div>    
+    
 <div class="breadcrumbs">
     <div class="container">
         <ul class="breadcrumbs__list">
@@ -69,24 +137,116 @@
     </div>
 </div>
 
+<div class="filter-menu">
+    
+    <button class="filter-close" type="button">
+        <span class="sr-only">Кнопка закрытия фильтров</span>
+    </button>
+    <div class="filter-category filter__item">
+        <h3 class="filter__title">Категории</h3>
+        <ul class="filter-category__list filter__content">
+            <li class="filter-category__item">
+                <a class="filter-category__link" href="#">Бургеры</a>
+            </li>
+            <li class="filter-category__item">
+                <a class="filter-category__link" href="#">Пицца</a>
+            </li>
+            <li class="filter-category__item">
+                <a class="filter-category__link" href="#">Сендвичи</a>
+            </li>
+            <li class="filter-category__item">
+                <a class="filter-category__link" href="#">Азиатская кухня</a>
+            </li>
+            <li class="filter-category__item">
+                <a class="filter-category__link" href="#">Сеты</a>
+            </li>
+            <li class="filter-category__item">
+                <a class="filter-category__link" href="#">Европейская кухня</a>
+            </li>
+            <li class="filter-category__item">
+                <a class="filter-category__link" href="#">Напитки</a>
+            </li>
+            <li class="filter-category__item">
+                <a class="filter-category__link" href="#">Алкоголь</a>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="filter-offer filter__item">
+        <h3 class="filter__title">Предложения</h3>
+        <form class="filter-offer__form filter__content" action="#">
+            <label class="filter-offer__label">
+                <div class="filter-offer__box">
+                    <input class="filter-offer__input" type="checkbox">
+                    <span class="filter-offer__checkbox"></span>
+                </div>
+                <span class="filter-offer__text">Со скидкой</span>
+            </label>
+            <label class="filter-offer__label">
+                <div class="filter-offer__box">
+                    <input class="filter-offer__input" type="checkbox">
+                    <span class="filter-offer__checkbox"></span>
+                </div>
+                <span class="filter-offer__text">Новинка</span>
+            </label>
+            <label class="filter-offer__label">
+                <div class="filter-offer__box">
+                    <input class="filter-offer__input" type="checkbox">
+                    <span class="filter-offer__checkbox"></span>
+                </div>
+                <span class="filter-offer__text">Хит</span>
+            </label>
+        </form>
+    </div>
+    
+    <div class="filter-price filter__item">
+        <h3 class="filter__title">Цена</h3>
+        <form class="filter-price__form filter__content" action="#">
+            <label class="filter-price__label">
+                <span class="filter-price__span">
+                    от
+                    <span class="filter-price__from"></span>
+                    ₴
+                </span>
+                <span class="filter-price__span">
+                    до
+                    <span class="filter-price__to"></span>
+                    ₴
+                </span> 
+            </label>
+            <input class="filter-price__input" type="text" 
+            data-min="0"
+            data-max="1100"
+            data-from="100"
+            data-to="1000">
+        </form>
+    </div>
+
+</div>
+
 <section class="catalog section">
     <div class="container">
 
         <div class="catalog__top">
-            <h2 class="title">Каталог продуктов</h2>
-            <div class="catalog__selects">
-                <form class="catalog__selects-form">
-                    <select class="catalog__selects-first select-style">
-                        <option value="">По названию</option>
-                        <option value="">По вкусу</option>
-                        <option value="">По виду</option>
-                    </select>
-                    <select class="catalog__selects-second select-style">
-                        <option value="">По 12</option>
-                        <option value="">По 15</option>
-                        <option value="">По 20</option>
-                    </select>
-                </form>
+            <h2 class="title catalog__top-title">Каталог продуктов</h2>
+            <div class="catalog__top-inner">
+                <button class="filter-btn" type="button">
+                    <span class="sr-only">Кнопка фильтров</span>
+                </button>
+                <div class="catalog__selects">
+                    <form class="catalog__selects-form">
+                        <select class="catalog__selects-first select-style">
+                            <option value="">По названию</option>
+                            <option value="">По вкусу</option>
+                            <option value="">По виду</option>
+                        </select>
+                        <select class="catalog__selects-second select-style">
+                            <option value="">По 12</option>
+                            <option value="">По 15</option>
+                            <option value="">По 20</option>
+                        </select>
+                    </form>
+                </div>
             </div>
         </div>         
 
@@ -355,46 +515,49 @@
 </section>
 
 
-<section class="discount section">
+<section class="discount discount__section">
     <div class="container">
         <h2 class="title discount__title">Акции и скидки</h2>
         <ul class="discount__list">
             <li class="discount__item">
-                <article class="restaurant-card">
-                    <img class="restaurant-card__image" src="images/restaurant-image/1.jpg" width="370" height="300" alt="Ресторан Blaze Pizza">
-                    <div class="restaurant-card__content">
-                        <p class="restaurant-card__text">
-                            Скидка 50% на вторую пиццу
-                        </p>
-                    </div>
-                </article>
+                <div class="discount__fix">
+                    <article class="restaurant-card">
+                        <img class="restaurant-card__image" src="images/restaurant-image/1.jpg" width="370" height="300" alt="Ресторан Blaze Pizza">
+                        <div class="restaurant-card__content">
+                            <p class="restaurant-card__text">
+                                Скидка 50% на вторую пиццу
+                            </p>
+                        </div>
+                    </article>
+                </div>
             </li>
             <li class="discount__item">
-                <article class="restaurant-card">
-                    <img class="restaurant-card__image" src="images/restaurant-image/5.jpg" width="370" height="300" alt="Ресторан KFC">
-                    <div class="restaurant-card__content">
-                       <p class="restaurant-card__text">
-                            Картошечка из KFC даром при заказе бургера
-                       </p>
-                    </div>
-                </article>
+                <div class="discount__fix">
+                    <article class="restaurant-card">
+                        <img class="restaurant-card__image" src="images/restaurant-image/5.jpg" width="370" height="300" alt="Ресторан KFC">
+                        <div class="restaurant-card__content">
+                           <p class="restaurant-card__text">
+                                Картошечка из KFC даром при заказе бургера
+                           </p>
+                        </div>
+                    </article>
+                </div>
             </li>
             <li class="discount__item">
-                <article class="restaurant-card">
-                    <img class="restaurant-card__image" src="images/restaurant-image/6.jpg" width="370" height="300" alt="Ресторан Star Burgers">
-                    <div class="restaurant-card__content">
-                        <p class="restaurant-card__text">
-                            Чёрные бургеры на чёрный день 
-                        </p>
-                    </div>
-                </article>
+                <div class="discount__fix">
+                    <article class="restaurant-card">
+                        <img class="restaurant-card__image" src="images/restaurant-image/6.jpg" width="370" height="300" alt="Ресторан Star Burgers">
+                        <div class="restaurant-card__content">
+                            <p class="restaurant-card__text">
+                                Чёрные бургеры на чёрный день 
+                            </p>
+                        </div>
+                    </article>
+                </div>
             </li>
         </ul>
     </div>
 </section>
-
-
-
 
 </main>
 
@@ -403,7 +566,7 @@
       <div class="footer__top">
         <div class="footer__subscribe">
             <a class="logo footer__logo" href="#">
-                <img class="logo__image" src="images/logo.svg" width="200" height="39" alt="Логотип">
+                <img class="logo__image footer__logo-image" src="images/logo.svg" width="200" height="39" alt="Логотип">
             </a>
             <form class="form-subscribe" name="form-footer">
                     <label class="sr-only" for="name">Введите ваш email</label>
